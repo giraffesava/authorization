@@ -10,7 +10,12 @@ const port = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true, // allow cookies
+    origin: process.env.CLIENT_URL, // frontend
+  })
+);
 app.use("/api", router);
 app.use(errorMiddleware);
 
