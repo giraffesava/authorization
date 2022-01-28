@@ -26,14 +26,14 @@ const App: FC = () => {
   }
 
   if (store.isLoading) {
-    return <div>Загрузка...</div>;
+    return <div>Loading...</div>;
   }
 
   if (!store.isAuth) {
     return (
       <div>
         <LoginForm />
-        <button onClick={getUsers}>Получить пользователей</button>
+        <button onClick={getUsers}>Get Users</button>
       </div>
     );
   }
@@ -41,18 +41,16 @@ const App: FC = () => {
   return (
     <div>
       <h1>
-        {store.isAuth
-          ? `Пользователь авторизован ${store.user.email}`
-          : "АВТОРИЗУЙТЕСЬ"}
+        {store.isAuth ? `User authorized ${store.user.email}` : "Please log in"}
       </h1>
       <h1>
         {store.user.isActivated
-          ? "Аккаунт подтвержден по почте"
-          : "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
+          ? "Account is confirmed"
+          : "The link was sent to your email"}
       </h1>
-      <button onClick={() => store.logout()}>Выйти</button>
+      <button onClick={() => store.logout()}>Log out</button>
       <div>
-        <button onClick={getUsers}>Получить пользователей</button>
+        <button onClick={getUsers}>Get users</button>
       </div>
       {users.map((user) => (
         <div key={user.email}>{user.email}</div>
